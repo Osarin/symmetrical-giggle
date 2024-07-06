@@ -1,0 +1,46 @@
+import nltk
+import random
+from nltk.chat.util import Chat, reflections
+
+# Define pairs of patterns and responses
+pairs = [
+    [
+        r"my name is (.*)",
+        ["Hello %1, how are you today?",]
+    ],
+    [
+        r"what is your name?",
+        ["My name is Chatbot and I'm here to help you.",]
+    ],
+    [
+        r"how are you?",
+        ["I'm doing good\nHow about You ?",]
+    ],
+    [
+        r"sorry (.*)",
+        ["It's okay", "No problem",]
+    ],
+    [
+        r"(.*) (good|great|fine)",
+        ["Nice to hear!", "Alright 🙂",]
+    ],
+    [
+        r"(.*)",
+        ["Sorry, I didn't understand that. Can you please rephrase?",]
+    ]
+]
+
+# Create a chatbot using NLTK's Chat class
+def chatbot():
+    print("Hi! I'm Chatbot. How can I assist you today?")
+    chat = Chat(pairs, reflections)
+    while True:
+        user_input = input("You: ")
+        if user_input.lower() == "quit":
+            break
+        response = chat.respond(user_input)
+        print("Chatbot:", response)
+
+if _name_ == "_main_":
+    nltk.download('punkt')  # Ensure NLTK's punkt tokenizer is downloaded
+    chatbot()
